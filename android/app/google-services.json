@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "516732021431",
+    "project_id": "attendence-d1f2d",
+    "storage_bucket": "attendence-d1f2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516732021431:android:0f12cf4d6f8b2ffffd7b32",
+        "android_client_info": {
+          "package_name": "com.as.as"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-SdRdcm5njP8l7-xY_2X7K8MWyWM9coM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516732021431:android:9ce2f99661f914ccfd7b32",
+        "android_client_info": {
+          "package_name": "com.ats.ats"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-SdRdcm5njP8l7-xY_2X7K8MWyWM9coM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516732021431:android:b7ce044b9fea176efd7b32",
+        "android_client_info": {
+          "package_name": "com.example.a1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-SdRdcm5njP8l7-xY_2X7K8MWyWM9coM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
