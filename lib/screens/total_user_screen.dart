@@ -10,7 +10,6 @@ class TotalUserScreen extends StatefulWidget {
 
 class _TotalUserScreenState extends State<TotalUserScreen> {
   final refData = FirebaseFirestore.instance.collection('User').snapshots();
-  final data = FirebaseFirestore.instance.collection('User');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

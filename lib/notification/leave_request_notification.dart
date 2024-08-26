@@ -1,5 +1,5 @@
 import 'package:attendence_system/button/round_button.dart';
-import 'package:attendence_system/class_notification.dart';
+import 'package:attendence_system/class/class_notification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

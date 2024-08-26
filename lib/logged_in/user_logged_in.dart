@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 
 class CheckLogin {
   User? user = FirebaseAuth.instance.currentUser;
-  Future<void> isLogin(BuildContext context)async {
-        await Future.delayed(const Duration(seconds: 1));
+
+  Future<void> isLogin(BuildContext context,String email,String name) async {
+    await Future.delayed(const Duration(seconds: 1));
 
     if (user != null) {
+      
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const MenuScreen()));
     } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 }

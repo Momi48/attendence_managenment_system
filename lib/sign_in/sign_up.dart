@@ -19,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isChanged = false;
   @override
   void dispose() {
     super.dispose();
@@ -26,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     emailController.dispose();
   }
 
-  void signUp() async {
+  void signUp(String email, String name) async {
     setState(() {
       loading = true;
     });
@@ -37,14 +38,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-       User? user = userCredential.user;
+      
+      User? user = userCredential.user;
 
-      ref.doc(user!.uid).set({'email': user.email, 'name': usernameController.text});
+      ref
+          .doc(user!.uid)
+          .set({'email': user.email, 'name': usernameController.text});
 
       setState(() {
         loading = false;
       });
-
+      
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
@@ -54,11 +58,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           backgroundColor: Colors.green,
         ),
       );
-
+     
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
+     
     } catch (error) {
       setState(() {
         loading = false;
@@ -128,8 +133,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 TextFormField(
                   controller: passwordController,
+                  obscureText: isChanged ? false : true,
                   decoration: InputDecoration(
                       hintText: 'Enter Password',
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {});
+                            isChanged = !isChanged;
+                          },
+                          icon: Icon(isChanged
+                              ? Icons.visibility_off
+                              : Icons.visibility)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12))),
                   validator: (value) {
@@ -147,7 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     loading: loading,
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        signUp();
+                        signUp(emailController.text, usernameController.text);
                       }
                     }),
                 const SizedBox(height: 10),

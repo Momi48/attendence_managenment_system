@@ -1,6 +1,6 @@
 import 'package:attendence_system/admin/admin_panel.dart';
-import 'package:attendence_system/attendence_screen.dart';
-import 'package:attendence_system/button/round_button.dart';
+// import 'package:attendence_system/screens/attendence_screen.dart';
+// import 'package:attendence_system/button/round_button.dart';
 import 'package:attendence_system/screens/mark_attend_data.dart';
 import 'package:attendence_system/screens/mark_leave.dart';
 import 'package:attendence_system/screens/percentage_screen.dart';
@@ -49,8 +49,10 @@ class _MenuScreenState extends State<MenuScreen> {
   String admin = 'admin';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    setState(() {
+      
+    });
     fetchUser();
   }
 
@@ -58,6 +60,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         title: const Text('Admin Screen'),
         leading: IconButton(
             onPressed: () async {
@@ -111,14 +114,14 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                     );
                   })),
-          RoundButton(
-              title: 'Go to Attendence Screen',
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AttendenceScreen()));
-              })
+        //   RoundButton(
+        //       title: 'Go to Attendence Screen',
+        //       onTap: () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //                 builder: (context) => const AttendenceScreen()));
+        //       })
         ],
       ),
     );

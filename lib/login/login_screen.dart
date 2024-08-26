@@ -1,8 +1,7 @@
 import 'package:attendence_system/admin/admin_panel.dart';
-import 'package:attendence_system/attendence_screen.dart';
+import 'package:attendence_system/screens/attendence_screen.dart';
 import 'package:attendence_system/button/round_button.dart';
 import 'package:attendence_system/sign_in/sign_up.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,13 +13,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final userData = FirebaseFirestore.instance.collection('User');
   bool loading = false;
   final auth = FirebaseAuth.instance;
-  final ref = FirebaseFirestore.instance;
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  bool isChanged = false;
 
   @override
   void dispose() {
@@ -28,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     emailController.dispose();
   }
-
+  
   void login() async {
     setState(() {
       loading = true;
@@ -39,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-
+  
       setState(() {
         loading = false;
       });
@@ -85,10 +83,12 @@ class _LoginScreenState extends State<LoginScreen> {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const AdminPanel()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AdminPanel()));
               },
-              child: Text('Admin'))
+              child: const Text('Admin'))
         ],
       ),
       body: Form(
@@ -123,8 +123,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextFormField(
                   controller: passwordController,
+                  obscureText:isChanged ? false : true,
                   decoration: InputDecoration(
                       hintText: 'Enter Password',
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              
+                            });
+                            isChanged = !isChanged;
+                          },
+                          icon: Icon(isChanged ? Icons.visibility_off : Icons.visibility)),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12))),
                   validator: (value) {

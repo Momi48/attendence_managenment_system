@@ -1,6 +1,6 @@
 import 'package:attendence_system/admin/menu_screen.dart';
 import 'package:attendence_system/button/round_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:attendence_system/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,6 @@ class AdminPanel extends StatefulWidget {
 class _AdminPanelState extends State<AdminPanel> {
   bool loading = false;
   final auth = FirebaseAuth.instance;
-  final ref = FirebaseFirestore.instance;
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -24,27 +23,33 @@ class _AdminPanelState extends State<AdminPanel> {
     passwordController.dispose();
     emailController.dispose();
   }
-  
+
   Future<void> adminLogin() async {
-  try{
-
-  
-    auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(), password: passwordController.text);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MenuScreen()));
-
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Admin Logged In Succesffuly'),
-      backgroundColor: Colors.green,
-    ));
-  } catch(e){
-        ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-      content: Text(e.toString()),
-      backgroundColor: Colors.red,
-    ));
-   }
-    
+    setState(() {
+      loading = true;
+    });
+    try {
+      auth.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const MenuScreen()));
+      setState(() {
+        loading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Admin Logged In Succesffuly'),
+        backgroundColor: Colors.green,
+      ));
+    } catch (e) {
+      setState(() {
+        loading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.toString()),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 
   @override
@@ -53,6 +58,13 @@ class _AdminPanelState extends State<AdminPanel> {
       appBar: AppBar(
         title: const Text('Admin Panel'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+            },
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: Form(
         key: formKey,
